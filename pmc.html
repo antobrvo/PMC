@@ -1,0 +1,240 @@
+<HTML>
+<HEAD>
+<TITLE>PMC</TITLE>
+<SCRIPT>
+  var carrito = [];
+  var total = 0;
+
+  function agregar(nombre, precio) {
+    carrito.push({ nombre: nombre, precio: precio });
+    total = total + precio;
+    actualizarCarrito();
+  }
+
+  function eliminar(indice) {
+    total = total - carrito[indice].precio;
+    carrito.splice(indice, 1);
+    actualizarCarrito();
+  }
+
+
+  function vaciarCarrito() {
+    carrito = [];
+    total = 0;
+    actualizarCarrito();
+  }
+
+   function actualizarCarrito() {
+    var listaHTML = "";
+    var textoWhatsApp = "Hola, quiero realizar el siguiente pedido de la cafeteria:\n\n";
+
+    if (carrito.length == 0) {
+      listaHTML = "<FONT SIZE='4'>Tu carrito esta vacio.</FONT>";
+    } else {
+      for (var i = 0; i < carrito.length; i++) {
+        listaHTML += "<FONT SIZE='4'>• " + carrito[i].nombre + " - $" + carrito[i].precio + " ";
+        listaHTML += "<BUTTON ONCLICK='eliminar(" + i + ")' STYLE='background-color: #ff4d4d; color: white; border: none; border-radius: 4px; cursor: pointer;'>X</BUTTON></FONT><BR>";
+        textoWhatsApp += "- " + carrito[i].nombre + " ($" + carrito[i].precio + ")\n";
+      }
+    }
+
+    textoWhatsApp += "\nTotal a pagar: $" + total;
+
+    document.getElementById("lista-carrito").innerHTML = listaHTML;
+    document.getElementById("total-precio").innerHTML = total;
+
+
+    var enlaceWA = "https://wa.me/524443052842?text=" + encodeURIComponent(textoWhatsApp);
+    document.getElementById("btn-whatsapp").href = enlaceWA;
+  }
+</SCRIPT>
+</HEAD>
+
+<BODY BGCOLOR="#AB4833" TEXT="#FFFFFF">
+<CENTER>
+
+<B><FONT SIZE="7">Menu de la cafeteria</FONT></B>
+<HR WIDTH="80%" SIZE="4" COLOR="#FFFFFF">
+<FONT SIZE="5"><B>Haz clic en cada alimento para ver su descripcion</B></FONT>
+<BR><BR>
+
+
+<TABLE BORDER="3" BORDERCOLOR="#FFFFFF" WIDTH="60%" CELLPADDING="10" CELLSPACING="0">
+  <TR BGCOLOR="#8A3624">
+    <TH><FONT COLOR="#FFFFFF" SIZE="5">Alimento (Clic para info)</FONT></TH>
+    <TH><FONT COLOR="#FFFFFF" SIZE="5">Precio</FONT></TH>
+    <TH><FONT COLOR="#FFFFFF" SIZE="5">Accion</FONT></TH>
+  </TR>
+
+
+  <TR>
+    <TD>
+      <DETAILS>
+        <SUMMARY STYLE="cursor: pointer;"><FONT COLOR="#FFFFFF" SIZE="5"><B>Cuernito</B> (Arrachera, Pollo)</FONT></SUMMARY>
+        <BR>
+        <FONT COLOR="#FFE0B2" SIZE="4">Pan relleno de carne a elegir, lechuga, jitomate, queso manchego y aderezo de la casa.</FONT>
+      </DETAILS>
+    </TD>
+    <TD ALIGN="CENTER"><FONT COLOR="#FFFFFF" SIZE="5">$30</FONT></TD>
+    <TD ALIGN="CENTER">
+      <BUTTON ONCLICK="agregar('Cuernito', 30)" STYLE="padding: 8px 15px; font-size: 16px; cursor: pointer; background-color: #FFD700; border: none; border-radius: 5px; font-weight: bold;">+ Agregar</BUTTON>
+    </TD>
+  </TR>
+
+  
+  <TR>
+    <TD>
+      <DETAILS>
+        <SUMMARY STYLE="cursor: pointer;"><FONT COLOR="#FFFFFF" SIZE="5"><B>Donas</B></FONT></SUMMARY>
+        <BR>
+        <FONT COLOR="#FFE0B2" SIZE="4">Dona glaseada o cubierta de chocolate con chispas de colores.</FONT>
+      </DETAILS>
+    </TD>
+    <TD ALIGN="CENTER"><FONT COLOR="#FFFFFF" SIZE="5">$20</FONT></TD>
+    <TD ALIGN="CENTER">
+      <BUTTON ONCLICK="agregar('Donas', 20)" STYLE="padding: 8px 15px; font-size: 16px; cursor: pointer; background-color: #FFD700; border: none; border-radius: 5px; font-weight: bold;">+ Agregar</BUTTON>
+    </TD>
+  </TR>
+
+
+  <TR>
+    <TD>
+      <DETAILS>
+        <SUMMARY STYLE="cursor: pointer;"><FONT COLOR="#FFFFFF" SIZE="5"><B>Baguette</B></FONT></SUMMARY>
+        <BR>
+        <FONT COLOR="#FFE0B2" SIZE="4">Pan con jamon, queso panela, aguacate, espinaca y vinagreta.</FONT>
+      </DETAILS>
+    </TD>
+    <TD ALIGN="CENTER"><FONT COLOR="#FFFFFF" SIZE="5">$40</FONT></TD>
+    <TD ALIGN="CENTER">
+      <BUTTON ONCLICK="agregar('Baguette', 40)" STYLE="padding: 8px 15px; font-size: 16px; cursor: pointer; background-color: #FFD700; border: none; border-radius: 5px; font-weight: bold;">+ Agregar</BUTTON>
+    </TD>
+  </TR>
+
+
+  <TR>
+    <TD>
+      <DETAILS>
+        <SUMMARY STYLE="cursor: pointer;"><FONT COLOR="#FFFFFF" SIZE="5"><B>Agua Natural</B></FONT></SUMMARY>
+        <BR>
+        <FONT COLOR="#FFE0B2" SIZE="4">Botella de agua de 600 ml bien fria.</FONT>
+      </DETAILS>
+    </TD>
+    <TD ALIGN="CENTER"><FONT COLOR="#FFFFFF" SIZE="5">$10</FONT></TD>
+    <TD ALIGN="CENTER">
+      <BUTTON ONCLICK="agregar('Agua Natural', 10)" STYLE="padding: 8px 15px; font-size: 16px; cursor: pointer; background-color: #FFD700; border: none; border-radius: 5px; font-weight: bold;">+ Agregar</BUTTON>
+    </TD>
+  </TR>
+
+ 
+  <TR>
+    <TD>
+      <DETAILS>
+        <SUMMARY STYLE="cursor: pointer;"><FONT COLOR="#FFFFFF" SIZE="5"><B>Agua de sabor</B></FONT></SUMMARY>
+        <BR>
+        <FONT COLOR="#FFE0B2" SIZE="4">Vaso de medio litro de agua fresca natural (Horchata, Jamaica o Limon con chia).</FONT>
+      </DETAILS>
+    </TD>
+    <TD ALIGN="CENTER"><FONT COLOR="#FFFFFF" SIZE="5">$15</FONT></TD>
+    <TD ALIGN="CENTER">
+      <BUTTON ONCLICK="agregar('Agua de sabor', 15)" STYLE="padding: 8px 15px; font-size: 16px; cursor: pointer; background-color: #FFD700; border: none; border-radius: 5px; font-weight: bold;">+ Agregar</BUTTON>
+    </TD>
+  </TR>
+
+
+  <TR>
+    <TD>
+      <DETAILS>
+        <SUMMARY STYLE="cursor: pointer;"><FONT COLOR="#FFFFFF" SIZE="5"><B>Paleta de hielo</B></FONT></SUMMARY>
+        <BR>
+        <FONT COLOR="#FFE0B2" SIZE="4">Paleta helada base agua o crema (Fresa, Limon, Mango o Chocolate).</FONT>
+      </DETAILS>
+    </TD>
+    <TD ALIGN="CENTER"><FONT COLOR="#FFFFFF" SIZE="5">$15</FONT></TD>
+    <TD ALIGN="CENTER">
+      <BUTTON ONCLICK="agregar('Paleta de hielo', 15)" STYLE="padding: 8px 15px; font-size: 16px; cursor: pointer; background-color: #FFD700; border: none; border-radius: 5px; font-weight: bold;">+ Agregar</BUTTON>
+    </TD>
+  </TR>
+
+
+  <TR>
+    <TD>
+      <DETAILS>
+        <SUMMARY STYLE="cursor: pointer;"><FONT COLOR="#FFFFFF" SIZE="5"><B>Sandwich</B> (Jamon, Pollo)</FONT></SUMMARY>
+        <BR>
+        <FONT COLOR="#FFE0B2" SIZE="4">Pan integral o blanco con pechuga de pavo o pollo deshebrado, queso amarillo, lechuga y mayonesa.</FONT>
+      </DETAILS>
+    </TD>
+    <TD ALIGN="CENTER"><FONT COLOR="#FFFFFF" SIZE="5">$20</FONT></TD>
+    <TD ALIGN="CENTER">
+      <BUTTON ONCLICK="agregar('Sandwich', 20)" STYLE="padding: 8px 15px; font-size: 16px; cursor: pointer; background-color: #FFD700; border: none; border-radius: 5px; font-weight: bold;">+ Agregar</BUTTON>
+    </TD>
+  </TR>
+
+ 
+  <TR>
+    <TD>
+      <DETAILS>
+        <SUMMARY STYLE="cursor: pointer;"><FONT COLOR="#FFFFFF" SIZE="5"><B>Vaso de frutas</B></FONT></SUMMARY>
+        <BR>
+        <FONT COLOR="#FFE0B2" SIZE="4">Coctel fresco de fruta picada (Sandia, melon, papaya, jicama y pepino) con limon y chilito opcional.</FONT>
+      </DETAILS>
+    </TD>
+    <TD ALIGN="CENTER"><FONT COLOR="#FFFFFF" SIZE="5">$15</FONT></TD>
+    <TD ALIGN="CENTER">
+      <BUTTON ONCLICK="agregar('Vaso de frutas', 15)" STYLE="padding: 8px 15px; font-size: 16px; cursor: pointer; background-color: #FFD700; border: none; border-radius: 5px; font-weight: bold;">+ Agregar</BUTTON>
+    </TD>
+  </TR>
+
+ 
+  <TR>
+    <TD>
+      <DETAILS>
+        <SUMMARY STYLE="cursor: pointer;"><FONT COLOR="#FFFFFF" SIZE="5"><B>Nieves</B></FONT></SUMMARY>
+        <BR>
+        <FONT COLOR="#FFE0B2" SIZE="4">Vaso de nieve (Limon, Vainilla, Fresa o Galleta).</FONT>
+      </DETAILS>
+    </TD>
+    <TD ALIGN="CENTER"><FONT COLOR="#FFFFFF" SIZE="5">$15</FONT></TD>
+    <TD ALIGN="CENTER">
+      <BUTTON ONCLICK="agregar('Nieves', 15)" STYLE="padding: 8px 15px; font-size: 16px; cursor: pointer; background-color: #FFD700; border: none; border-radius: 5px; font-weight: bold;">+ Agregar</BUTTON>
+    </TD>
+  </TR>
+</TABLE>
+
+<BR><BR>
+
+
+<TABLE BORDER="3" BORDERCOLOR="#FFD700" BGCOLOR="#732B1C" WIDTH="60%" CELLPADDING="15">
+  <TR>
+    <TD ALIGN="CENTER">
+      <FONT SIZE="6" COLOR="#FFD700"><B>Tu Carrito de Compras</B></FONT>
+      <HR WIDTH="90%" COLOR="#FFD700">
+      
+
+      <DIV ID="lista-carrito">
+        <FONT SIZE="4">Tu carrito esta vacio.</FONT>
+      </DIV>
+
+      <BR>
+      <FONT SIZE="5"><B>Total a pagar: $<SPAN ID="total-precio">0</SPAN></B></FONT>
+      <BR><BR>
+
+      <BUTTON ONCLICK="vaciarCarrito()" STYLE="padding: 8px 15px; font-size: 14px; cursor: pointer; background-color: #CCCCCC; border: none; border-radius: 5px;">
+        Vaciar Carrito
+      </BUTTON>
+    </TD>
+  </TR>
+</TABLE>
+
+<BR><BR>
+
+
+<A ID="btn-whatsapp" HREF="https://wa.me/524443052842?text=Hola,%20quiero%20hacer%20un%20pedido" TARGET="_blank" STYLE="display: inline-block; background-color: #25D366; color: white; text-decoration: none; padding: 14px 30px; font-size: 20px; font-weight: bold; border-radius: 35px; box-shadow: 0px 4px 10px rgba(0,0,0,0.4); text-align: center;">
+  Realiza tu pedido por WhatsApp
+</A>
+
+<BR><BR>
+</CENTER>
+</BODY>
+</HTML>
